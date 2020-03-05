@@ -1,0 +1,11 @@
+AAL american
+AAL american_airlines
+AFR air_france
+DLH lufthansa
+JAL japanair
+KLM klm
+SAS scandinavian
+SWR swiss
+SWR swiss_air
+TAP air_portugal
+UAE emirates

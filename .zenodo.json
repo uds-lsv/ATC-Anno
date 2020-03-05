@@ -1,0 +1,27 @@
+{
+    "language": "eng", 
+    "license": "MIT", 
+    "title": "ATC-Anno", 
+    "references": [
+        "Marc Schulder, Johannah O'Mahony, Yury Bakanouski, Dietrich Klakow (2020). ATC-Anno: Semantic Annotation for Air Traffic Control with Assistive Auto-Annotation. In Proceedings of the International Conference on Language Resources and Evaluation (LREC), Marseilles, France."
+    ], 
+    "upload_type": "software", 
+    "keywords": [
+        "Annotation", 
+        "Air Traffic Control"
+    ], 
+    "publication_date": "2020-05-11", 
+    "creators": [
+        {
+            "orcid": "0000-0002-4183-8489", 
+            "affiliation": "Institute of German Sign Language", 
+            "name": "Marc Schulder"
+        }, 
+        {
+            "affiliation": "Spoken Language Systems, Saarland University", 
+            "name": "Yury Bakanouski"
+        }
+    ], 
+    "access_right": "open", 
+    "description": "<p>ATC-Anno is an annotation tool for the transcription and semantic annotation of air traffic control utterances.</p>\n\n<p>If you use the tool in your research, please cite the associated paper:</p>\n\n<p>Marc Schulder, Johannah O&#39;Mahony, Yury Bakanouski, Dietrich Klakow (2020). ATC-Anno: Semantic Annotation for Air Traffic Control with Assistive Auto-Annotation. In <em>Proceedings of the International Conference on Language Resources and Evaluation (LREC)</em>, Marseilles, France.</p>"
+}
