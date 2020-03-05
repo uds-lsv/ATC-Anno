@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3698319.svg)](https://doi.org/10.5281/zenodo.3698318)
+
 # ATC-Anno
 
 ATC-Anno is an annotation tool for the transcription and semantic annotation of air traffic control utterances.
