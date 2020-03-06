@@ -49,6 +49,3 @@ If you use it in your research or work, please cite the following publication:
   publisher = {European Language Resources Association (ELRA)},
 }
 ```
-
-## Acknowledgements
-This work was mainly conducted as part of the AcListant® project, which was supported by DLR Technology Marketing and the Helmholtz Validation Fund.
