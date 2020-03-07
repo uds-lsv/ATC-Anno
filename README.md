@@ -13,7 +13,7 @@ To demonstrate the workflow and features of the tool, we have created a brief vi
 The video has optional subtitles.
 
 - Repository location: `media/tutorial.mp4`
-- [Download the tutorial](media/tutorial.mp4?raw=true)
+- [Download the tutorial](media/tutorial.mp4?raw=true) (you may have to right click and use "Save link as...")
 - [Watch on Youtube](https://youtu.be/4me6htnJIBk)
 
 
