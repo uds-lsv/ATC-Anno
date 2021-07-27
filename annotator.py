@@ -459,7 +459,7 @@ class FileHunter(wx.Frame):
         self.grammar_name = self.converter.getGrammarName()
 
         wx.Frame.__init__(self, parent, -1, title, size=(995, 735))
-        panel = wx.Panel(self)
+        panel = wx.Panel(self, size=wx.Size(995, 735))
         self.Bind(wx.EVT_CLOSE, self.OnClose)
 
         # Directory Selector
