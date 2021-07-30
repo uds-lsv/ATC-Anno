@@ -43,8 +43,9 @@ If you use it in your research or work, please cite the following publication:
 @InProceedings{schulder2020atcAnno,
   author = {Schulder, Marc and O'Mahony, Johannah and Bakanouski, Yury and Klakow, Dietrich},
   title = {ATC-Anno: Semantic Annotation for Air Traffic Control with Assistive Auto-Annotation},
-  booktitle = {Proceedings of the Twelfth International Conference on Language Resources and Evaluation (LREC 2018)},
+  booktitle = {Proceedings of the Twelfth International Conference on Language Resources and Evaluation (LREC 2020)},
   year = {2020},
+  month = {May},
   address = {Marseille, France},
   publisher = {European Language Resources Association (ELRA)},
 }
