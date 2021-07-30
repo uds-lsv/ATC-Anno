@@ -1,0 +1,46 @@
+# YAML 1.2
+# Metadata for citation of this software according to the CFF format (https://citation-file-format.github.io/)
+cff-version: 1.1.0
+message: If you use this software, please cite the following works.
+title: ATC-Anno
+doi: 10.5281/zenodo.5148597
+authors:
+- given-names: Marc
+  family-names: Schulder
+  affiliation: Institute of German Sign Language
+  orcid: https://orcid.org/0000-0002-4183-8489
+- given-names: Yury
+  family-names: Bakanouski
+  affiliation: Spoken Language Systems, Saarland University
+version: 1.0.1
+date-released: 2020-05-11
+repository-code: https://github.com/uds-lsv/ATC-Anno
+license: MIT
+abstract: ATC-Anno is an annotation tool for the transcription and semantic annotation of air traffic control utterances.
+references:
+  - type: conference-paper
+  - title: ATC-Anno: Semantic Annotation for Air Traffic Control with Assistive Auto-Annotation
+  - authors:
+    - given-names: Marc
+      family-names: Schulder
+      affiliation: Institute of German Sign Language
+      orcid: https://orcid.org/0000-0002-4183-8489
+    - given-names: Johannah
+      family-names: O'Mahony
+      affiliation: Spoken Language Systems, Saarland University
+    - given-names: Yury
+      family-names: Bakanouski
+      affiliation: Spoken Language Systems, Saarland University
+    - given-names: Dietrich
+      family-names: Klakow
+      affiliation: Spoken Language Systems, Saarland University
+      orcid: https://orcid.org/0000-0002-4147-9690
+  - collection-title: Proceedings of the 12th Conference on Language Resources and Evaluation
+  - conference:
+    - 12th Conference on Language Resources and Evaluation
+    - website: https://lrec2020.lrec-conf.org/
+  license: CC-BY-NC-4.0
+  date-published: 2020-05-13
+  start: 6375
+  end: 6380
+  url: https://aclanthology.org/2020.lrec-1.783/
