@@ -35,7 +35,7 @@ This software is published under an [MIT License](LICENSE).
 
 If you use it in your research or work, please cite the following publication:
 
-[Schulder, Marc](http://marc.schulder.info) and O'Mahony, Johannah and Bakanouski, Yury and [Klakow, Dietrich](https://www.lsv.uni-saarland.de/people/dietrich-klakow/) (2020). **"ATC-Anno: Semantic Annotation for Air Traffic Control with Assistive Auto-Annotation"**. _Proceedings of the 12th Conference on Language Resources and Evaluation (LREC)_, Marseille, France, 11–16 May 2020.
+[Schulder, Marc](http://marc.schulder.info) and O'Mahony, Johannah and Bakanouski, Yury and [Klakow, Dietrich](https://www.lsv.uni-saarland.de/people/dietrich-klakow/) (2020). **["ATC-Anno: Semantic Annotation for Air Traffic Control with Assistive Auto-Annotation"](https://aclanthology.org/2020.lrec-1.783/)**. _Proceedings of the 12th Conference on Language Resources and Evaluation (LREC)_, Marseille, France, 11–16 May 2020.
 
 
 ### BibTex
