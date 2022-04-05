@@ -4,7 +4,8 @@ import operator
 import itertools
 from os import path
 
-from FileTools import loadAirlineCallsigns
+from .FileTools import loadAirlineCallsigns
+from functools import reduce
 
 reOpenTag = re.compile('^<([a-z_]+)>$')
 reOpenAnyTag = re.compile('^<([a-z_="]+)>$')
@@ -437,7 +438,7 @@ class UtteranceUnit(object):
                    victor='V', whisky='W', xray='X',
                    yankee='Y', zoulou='Z')
     LETTERWORDS = dict()
-    for word, letter in LETTERS.iteritems():
+    for word, letter in LETTERS.items():
         LETTERWORDS.setdefault(letter, list()).append(word)
 
     SINGLE_DIGITS = dict(one='1', two='2', three='3',
@@ -526,7 +527,7 @@ class UtteranceUnit(object):
                 items.insert(nxt, 'zero')
             items.pop(i)
 
-        for multiple, multiplier in self.MULTIPLIERS.iteritems():
+        for multiple, multiplier in self.MULTIPLIERS.items():
             while multiple in items:
                 i = items.index(multiple)
                 nxt = i + 1
@@ -537,7 +538,7 @@ class UtteranceUnit(object):
                 items.pop(i)
 
         # Tens
-        for tenner, tenval in self.TENS_DIGITS.iteritems():
+        for tenner, tenval in self.TENS_DIGITS.items():
             while tenner in items:
                 i = items.index(tenner)
                 nxt = i + 1
@@ -547,7 +548,7 @@ class UtteranceUnit(object):
                 elif items[nxt] not in self.SINGLE_DIGITS or items[nxt] == 'zero':
                     items.insert(nxt, 'zero')
         # Teen values (11-19)
-        for teen, teenval in self.TEEN_DIGITS.iteritems():
+        for teen, teenval in self.TEEN_DIGITS.items():
             while teen in items:
                 i = items.index(teen)
                 items[i] = teenval
@@ -1221,10 +1222,10 @@ class CommandSet:
         return string
 
     def getCallsign(self):
-        print self.callsign
+        print(self.callsign)
 
     def getCommands(self):
-        print self.commands
+        print(self.commands)
 
     def addCommand(self, command):
         self.commands.append(command)
@@ -1270,7 +1271,7 @@ class CommandSet:
 
             # Prepare string construction
             cmd = [self.callsign.callsign, NO_CONCEPT]
-            frames['total'] = itertools.chain.from_iterable(frames.values())
+            frames['total'] = itertools.chain.from_iterable(list(frames.values()))
 
             # Compute confidences
             items = list()
