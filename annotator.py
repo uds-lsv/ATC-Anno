@@ -122,7 +122,7 @@ class MyListCtrl(wx.ListCtrl):
             else:
                 self.SetItemTextColour(i, 'red')
         else:
-            print "WARNING: %s does not exist" % filename
+            print("WARNING: %s does not exist" % filename)
 
 
 class WaveformPanel(wx.Window):
@@ -249,12 +249,12 @@ cmdsXML = {'cleared_ils': ['runway'],
            'go_around': [],
            'navigation_own': [],
            }
-keywordsXml = tagsXML + specialTagsXML + cmdsXML.keys()
+keywordsXml = tagsXML + specialTagsXML + list(cmdsXML.keys())
 autocompXML = ['<callsign><airline></airline><flightnumber></flightnumber></callsign>']
 for tag in tagsXML:
     autocompXML.append('<{0}>  </{0}>'.format(tag))
 
-for cmd, content in cmdsXML.iteritems():
+for cmd, content in cmdsXML.items():
     elems = ['<command="{0}"> '.format(cmd)]
     for tag in content:
         if len(tag.strip()) > 0:

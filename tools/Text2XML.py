@@ -15,8 +15,8 @@ from signal import signal, alarm, SIGALRM
 from warnings import warn
 from functools import partial
 from operator import itemgetter
-from vocabularyHandlers import findCommandVocabularies
-from FileTools import loadAirlineCallsigns
+from .vocabularyHandlers import findCommandVocabularies
+from .FileTools import loadAirlineCallsigns
 
 
 CONF_SEPARATOR = ':'
@@ -137,7 +137,7 @@ class SkipFST:
 
         # Prepare auxiliary information
         originalSentence = ' '.join(sentence)
-        sentence = map(self._lower_, sentence)
+        sentence = list(map(self._lower_, sentence))
 
         if callsign_whitelist is None:
             callsign_whitelist = self.default_callsign_whitelist
@@ -147,7 +147,7 @@ class SkipFST:
             filtered_sentence = set(words)
             filtered_sentence.difference_update(self.single_digits)
             filtered_sentence.difference_update(self.letters)
-            for cmd, vocab in cmdVocabularies.iteritems():
+            for cmd, vocab in cmdVocabularies.items():
                 if vocab.isdisjoint(filtered_sentence):
                     irrelevant_commands.add(cmd)
 
@@ -191,7 +191,7 @@ class SkipFST:
             signal(SIGALRM, partial(self.transduceTimerHandler, text=originalSentence))
             alarm(timeout)
 
-        bestDistance = sys.maxint
+        bestDistance = sys.maxsize
 
         # Start parsing
         i = 0
@@ -253,7 +253,7 @@ class SkipFST:
                             complete_parses.append((output, '', skips, tagcost, list(), -1, skipped_words, False))
                     else:
                         considered_word = False
-                        for outnode, transitions in branches.iteritems():
+                        for outnode, transitions in branches.items():
                             if outnode != 'is_terminal':
                                 for transition in transitions:
                                     nodeword = transition['outword'].lower()
@@ -376,7 +376,7 @@ class SkipFST:
         if len(complete_parses) > 0:
             cost_complete = sorted_complete[0][3]  # Complete cost is skips
         else:
-            cost_complete = sys.maxint
+            cost_complete = sys.maxsize
 
         # Sort incomplete parses
         sorted_incomplete = []
@@ -399,7 +399,7 @@ class SkipFST:
             cost_incomplete = sorted_incomplete[0][3] + len(
                 sorted_incomplete[0][1])  # Incomplete cost is skips plus remaining unparsed words
         else:
-            cost_incomplete = sys.maxint
+            cost_incomplete = sys.maxsize
 
         # Pick better parse set
         if cost_complete <= cost_incomplete:
@@ -455,7 +455,7 @@ class SkipFST:
         return remaining_open_tags, closed_tags
 
     def addMissingWords(self, sentence, base_xml):
-        sentence = map(str.lower, sentence)
+        sentence = list(map(str.lower, sentence))
         xmlSentence = base_xml.strip().split()
         seenWords, remainingWords, xmlSentence = self._addMissingWords(sentence, xmlSentence)
         return ' '.join(seenWords)
@@ -512,10 +512,10 @@ class SkipFST:
                 defluffedSentence.append(token)
         if verbose:
             if len(sentence) == len(defluffedSentence):
-                print "No OOG words in sentence:", ' '.join(sentence)
+                print("No OOG words in sentence:", ' '.join(sentence))
             else:
-                print "original sentence: ", ' '.join(sentence)
-                print "Defluffed sentence:", ' '.join(defluffedSentence)
+                print("original sentence: ", ' '.join(sentence))
+                print("Defluffed sentence:", ' '.join(defluffedSentence))
         return defluffedSentence
 
 
@@ -567,8 +567,8 @@ class Text2XMLConverter:
 
     def getVocabularyFromGrammar(self):
         words = set()
-        for branches in self.grammar.itervalues():
-            for outnode, transitions in branches.iteritems():
+        for branches in self.grammar.values():
+            for outnode, transitions in branches.items():
                 if outnode != 'is_terminal':
                     for transition in transitions:
                         nodeword = transition['outword'].lower()

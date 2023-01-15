@@ -22,8 +22,8 @@ def findCommandVocabularies(grammar):
 
     # Establish searchspaces
     cmd_searchspaces = dict()
-    for branches in grammar.itervalues():
-        for outnode, transitions in branches.iteritems():
+    for branches in grammar.values():
+        for outnode, transitions in branches.items():
             if outnode != 'is_terminal':
                 for transition in transitions:
                     nodeword = transition['outword'].lower()
@@ -33,7 +33,7 @@ def findCommandVocabularies(grammar):
 
     # Collect vocabulary of commands
     commands = dict()
-    for cmd, searchspace in cmd_searchspaces.iteritems():
+    for cmd, searchspace in cmd_searchspaces.items():
         commands[cmd] = _collectSubgrammarVocabulary_(searchspace, {close_tag}, grammar)
     return commands
 
@@ -53,7 +53,7 @@ def _collectSubgrammarVocabulary_(searchspace, stopwords, grammar):
         node = nodes.pop()
         seen_nodes.add(node)
         branches = grammar[node]
-        for outnode, transitions in branches.iteritems():
+        for outnode, transitions in branches.items():
             if outnode != 'is_terminal' and outnode not in seen_nodes:
                 for transition in transitions:
                     nodeword = transition['outword'].lower()
@@ -65,7 +65,7 @@ def _collectSubgrammarVocabulary_(searchspace, stopwords, grammar):
 
 def findTranscriptionTagVocabulary(mainDir, tag, is_command, whitelist=None, verbose=0):
     if verbose >= 1:
-        print "Checking dir", mainDir
+        print("Checking dir", mainDir)
     vocabulary = dict()
     if whitelist is None:
         whitelist = set()
@@ -85,7 +85,7 @@ def findTranscriptionTagVocabulary(mainDir, tag, is_command, whitelist=None, ver
                 # Recursive directory search
                 if path.isdir(fpath):
                     subvoc = findTranscriptionTagVocabulary(fpath, tag, is_command, whitelist, verbose)
-                    for word, sources in subvoc.iteritems():
+                    for word, sources in subvoc.items():
                         if word in vocabulary:
                             vocabulary[word] = vocabulary[word] + sources
                         else:
@@ -101,7 +101,7 @@ def findTranscriptionTagVocabulary(mainDir, tag, is_command, whitelist=None, ver
                             for i, word in enumerate(words):
                                 if word not in whitelist:
                                     if verbose >= 1 and (i == 0 or i + 1 == len(words)):
-                                        print 'Unknown border word "{0} in {1}"'.format(word, fpath)
+                                        print('Unknown border word "{0} in {1}"'.format(word, fpath))
 
                                     if word in vocabulary:
                                         vocabulary[word].append(fpath)

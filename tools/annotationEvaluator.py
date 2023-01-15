@@ -10,7 +10,7 @@ Will only compare cmd files for which tra files are available.
 import os
 import re
 from os import path
-from FileTools import stripXML
+from .FileTools import stripXML
 
 
 def textsEqual(text1, text2):
@@ -136,14 +136,14 @@ class Utterance:
         for cmd in cmds:
             parts = cmd.split(' ', 1)
             if len(parts) == 1:
-                print "WARNING: Cmd is missing either callsign or command:", self.absolute_root
+                print("WARNING: Cmd is missing either callsign or command:", self.absolute_root)
                 cpts.append(parts[0])
             else:
                 cpts.append(parts[1])
                 if callsign is None:
                     callsign = parts[0]
                 elif callsign != parts[0]:
-                    print "WARNING: Different callsigns in commands of single utterance found:", self.absolute_root
+                    print("WARNING: Different callsigns in commands of single utterance found:", self.absolute_root)
         return callsign, cpts
 
     @staticmethod
@@ -242,39 +242,39 @@ class DirStats:
         return self.dirItems.get(dirname, None)
 
     def dirItemIterator(self):
-        return self.dirItems.iteritems()
+        return iter(self.dirItems.items())
 
     def printStatList(self, countername):
-        print 'Total of {0} {1}'.format(self.total, countername)
+        print('Total of {0} {1}'.format(self.total, countername))
         if self.getTotal() > 0:
             for dirpath, utterances in self.dirItemIterator():
                 numUtterances = len(utterances)
                 if numUtterances > 0:
-                    print "{1} {2} in {0}:".format(dirpath, numUtterances, countername)
+                    print("{1} {2} in {0}:".format(dirpath, numUtterances, countername))
                     for utterance in utterances:
-                        print "   {0.root}".format(utterance)
+                        print("   {0.root}".format(utterance))
 
     def printCmdList(self, countername):
-        print 'Total of {0} {1}'.format(self.total, countername)
+        print('Total of {0} {1}'.format(self.total, countername))
         if self.getTotal() > 0:
             for dirpath, utterances in self.dirItemIterator():
                 numUtterances = len(utterances)
                 if numUtterances > 0:
-                    print "{1} {2} in {0}:".format(dirpath, numUtterances, countername)
+                    print("{1} {2} in {0}:".format(dirpath, numUtterances, countername))
                     for utterance in utterances:
-                        print "   {0.root}   {0.genCmd} instead of {0.cmd}".format(utterance)
+                        print("   {0.root}   {0.genCmd} instead of {0.cmd}".format(utterance))
 
     def printStatDetails(self):
         showedInstance = False
         for utterance in self.items:
             showedInstance = True
-            print "File:              ", utterance.absolute_root
-            print "Transcription:     ", utterance.getTra()
-            print "Gold commands:     ", utterance.getCmd()
-            print "Generated commands:", utterance.generateCmd(None)
-            print
+            print("File:              ", utterance.absolute_root)
+            print("Transcription:     ", utterance.getTra())
+            print("Gold commands:     ", utterance.getCmd())
+            print("Generated commands:", utterance.generateCmd(None))
+            print()
         if not showedInstance:
-            print "- None -"
+            print("- None -")
 
 
 class CommandEvaluator:
@@ -327,59 +327,59 @@ class CommandEvaluator:
 
     def evaluate(self, dirContents, verbose=True):
         relevantDirs = set()
-        for dirpath, utterances in dirContents.iteritems():
+        for dirpath, utterances in dirContents.items():
             if len(utterances) > 0:
                 self._evaluateDir_(dirpath, utterances)
                 relevantDirs.add(dirpath)
         self.utteranceDirs = sorted(relevantDirs)
 
         if verbose:
-            print "=== Miscellaneous mismatches between cmd annotation and commands generated from tra annotation ==="
+            print("=== Miscellaneous mismatches between cmd annotation and commands generated from tra annotation ===")
             self.mismatchMisc.printStatDetails()
 
-            print "=== Mismatches between text in cor and tra files ==="
+            print("=== Mismatches between text in cor and tra files ===")
             self.mismatchCorTra.printStatDetails()
             #
-            print '\n=== TURN_HEADING command without a mentioned direction ==='
+            print('\n=== TURN_HEADING command without a mentioned direction ===')
             self.turnNoDir.printStatDetails()
 
-            print '\n=== REDUCE command without word "reduce" ==='
+            print('\n=== REDUCE command without word "reduce" ===')
             self.reduceCmdInferred.printStatDetails()
 
-            print '\n=== Above/Below word not tagged ==='
+            print('\n=== Above/Below word not tagged ===')
             self.aboveBelowUntagged.printStatDetails()
 
-            print '\n=== ILS left/right mismatch ==='
+            print('\n=== ILS left/right mismatch ===')
             self.ilsMismatch.printCmdList('ILS left/right mismatches')
 
-            print '\n=== Used "reduce" tag where only "speed" can be known ==='
+            print('\n=== Used "reduce" tag where only "speed" can be known ===')
             self.falseReduceTag.printCmdList('reduce tag for speed tag')
 
-            print '\n=== Incorrect values ==='
+            print('\n=== Incorrect values ===')
             self.incorrectValue.printStatDetails()
 
-            print '\n=== Deprecated Tags ==='
+            print('\n=== Deprecated Tags ===')
             self.deprecatedTag.printStatDetails()
 
-            print "\n=== Missing Callsigns (but inferred by annotator) ==="
+            print("\n=== Missing Callsigns (but inferred by annotator) ===")
             self.missingCallsigns.printCmdList('missing callsigns')
 
-            print "\n=== Incomplete Callsigns (but inferred by annotator) ==="
+            print("\n=== Incomplete Callsigns (but inferred by annotator) ===")
             self.missingCallsigns.printCmdList('incomplete callsigns')
 
-            print "\n=== Incorrect Callsigns ==="
+            print("\n=== Incorrect Callsigns ===")
             self.missingCallsigns.printCmdList('incorrect callsigns')
 
-            print "\n=== Missing xml annotations (i.e. tra files) ==="
+            print("\n=== Missing xml annotations (i.e. tra files) ===")
             self.missingTra.printStatList('missing tra')
 
-            print "\n=== Missing cmd annotations (i.e. cmd files) ==="
+            print("\n=== Missing cmd annotations (i.e. cmd files) ===")
             self.missingCmd.printStatList('missing cmd')
 
-            print ''
+            print('')
 
     def _evaluateDir_(self, dirpath, utterances):
-        for utterance in sorted(utterances.itervalues()):
+        for utterance in sorted(utterances.values()):
             if utterance.has('tra'):
                 deprecatedTags = ['fix']
                 for deprecatedTag in deprecatedTags:
@@ -504,35 +504,35 @@ class CommandEvaluator:
                       '{2} deprecated tags (not counted as errors)'
         summary_missing = '   Missing:  {0} missing tra, {1} missing cmd'
         summary_misc = '   Misc:     {0} unclassified command mismatches'
-        print '=== Summary of Command Generation ==='
+        print('=== Summary of Command Generation ===')
 
         # Summary by directory
         for dirname in self.utteranceDirs:
-            print '{1} errors (in {2} files in {0})'.format(dirname, self.error.getDirCount(dirname),
-                                                            len(self.error.getDirItems(dirname)))
-            print summary_callsigns.format(self.missingCallsigns.getDirCount(dirname),
+            print('{1} errors (in {2} files in {0})'.format(dirname, self.error.getDirCount(dirname),
+                                                            len(self.error.getDirItems(dirname))))
+            print(summary_callsigns.format(self.missingCallsigns.getDirCount(dirname),
                                            self.incompleteCallsigns.getDirCount(dirname),
-                                           self.incorrectCallsigns.getDirCount(dirname))
-            print summary_commands.format(self.reduceCmdInferred.getDirCount(dirname),
-                                          self.turnNoDir.getDirCount(dirname))
-            print summary_values.format(self.incorrectValue.getDirCount(dirname))
-            print summary_xml.format(self.falseReduceTag.getDirCount(dirname),
+                                           self.incorrectCallsigns.getDirCount(dirname)))
+            print(summary_commands.format(self.reduceCmdInferred.getDirCount(dirname),
+                                          self.turnNoDir.getDirCount(dirname)))
+            print(summary_values.format(self.incorrectValue.getDirCount(dirname)))
+            print(summary_xml.format(self.falseReduceTag.getDirCount(dirname),
                                      self.aboveBelowUntagged.getDirCount(dirname),
-                                     self.deprecatedTag.getDirCount(dirname))
-            print summary_missing.format(self.missingTra.getDirCount(dirname),
-                                         self.missingCmd.getDirCount(dirname))
-            print summary_misc.format(self.mismatchMisc.getDirCount(dirname))
+                                     self.deprecatedTag.getDirCount(dirname)))
+            print(summary_missing.format(self.missingTra.getDirCount(dirname),
+                                         self.missingCmd.getDirCount(dirname)))
+            print(summary_misc.format(self.mismatchMisc.getDirCount(dirname)))
 
         # Overall summary
-        print '\nTotal: {0} errors (in {1} files)'.format(self.error.total, len(self.error.items))
-        print summary_callsigns.format(self.missingCallsigns.total, self.incompleteCallsigns.total,
-                                       self.incorrectCallsigns.total)
-        print summary_commands.format(self.reduceCmdInferred.total, self.turnNoDir.total)
-        print summary_values.format(self.incorrectValue.total)
-        print summary_xml.format(self.falseReduceTag.total, self.aboveBelowUntagged.total,
-                                 self.deprecatedTag.total)
-        print summary_missing.format(self.missingTra.total, self.missingCmd.total)
-        print summary_misc.format(self.mismatchMisc.total)
+        print('\nTotal: {0} errors (in {1} files)'.format(self.error.total, len(self.error.items)))
+        print(summary_callsigns.format(self.missingCallsigns.total, self.incompleteCallsigns.total,
+                                       self.incorrectCallsigns.total))
+        print(summary_commands.format(self.reduceCmdInferred.total, self.turnNoDir.total))
+        print(summary_values.format(self.incorrectValue.total))
+        print(summary_xml.format(self.falseReduceTag.total, self.aboveBelowUntagged.total,
+                                 self.deprecatedTag.total))
+        print(summary_missing.format(self.missingTra.total, self.missingCmd.total))
+        print(summary_misc.format(self.mismatchMisc.total))
 
 
 def prepareDirInfos(filedir, recurse=True):
@@ -563,7 +563,7 @@ def listErroneousUtterances(filedir, conceptGenerator):
     cmdEval.evaluate(dirContents, verbose=False)
     dirItems = cmdEval.error.dirItems
     if len(dirItems) > 1:
-        print "Received more than one directory. This should have been impossible!"
-    for utterances in dirItems.itervalues():
+        print("Received more than one directory. This should have been impossible!")
+    for utterances in dirItems.values():
         return utterances
     return []
