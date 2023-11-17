@@ -22,6 +22,9 @@ ATC-Anno is written in Python 2.7 and requires the following additional packages
 - [wxPython](https://www.wxpython.org/)
 - [pyaudio](https://people.csail.mit.edu/hubert/pyaudio/)
 
+Note: The installation on Ubuntu 20.04 or higher is non trivial due to older dependencies. We therefore have a build on a VM, which can be accessed here:
+https://unisaarlandde-my.sharepoint.com/:f:/g/personal/s9algawl_uni-saarland_de/EomjdHvZ0gtBtrr8-s36C3QBlbV_v42HmGk9exmiRiOWIQ?e=Z7btQP
+
 ### Finite-state Grammar
 To access the **_Get XML_** feature, you need to provide a finite-state grammar that uses the [OpenFST](http://www.openfst.org/) format.
 The default location for the grammar is `data/grammars/default.fst`
